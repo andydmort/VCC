@@ -1,0 +1,19 @@
+{
+  "name": "vcc",
+  "version": "1.0.0",
+  "description": "This is a compiler that will take template files and create html and js files. Similar to View.js but more of an open ended framework. The template files will consists of just html and js. These template files will be compiled together into a single html file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andydmort/VCC.git"
+  },
+  "author": "Andrew Mortenson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andydmort/VCC/issues"
+  },
+  "homepage": "https://github.com/andydmort/VCC#readme"
+}
