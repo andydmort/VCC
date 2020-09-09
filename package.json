@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/andydmort/VCC/issues"
   },
-  "homepage": "https://github.com/andydmort/VCC#readme"
+  "homepage": "https://github.com/andydmort/VCC#readme",
+  "dependencies": {
+    "typescript": "^4.0.2"
+  }
 }
