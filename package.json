@@ -19,5 +19,8 @@
   "homepage": "https://github.com/andydmort/VCC#readme",
   "dependencies": {
     "typescript": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.10.1"
   }
 }
