@@ -1,7 +1,7 @@
 
 /*
     Some thoughts about imports.
-    Imports need to be accessed by import name. So we can say what imports do you have?
+    Imports need to be accessed by file name. So we can say what imports do you have?
     The name may be used multiple times. 
     The containing information should be group and line number 
 */
@@ -23,7 +23,7 @@ export class File_Token {
     name: string;
     groups: Map<string,string[]>; // Group name to array of strings
     // import name to 
-    imports: Map<string, an_import[]>; // Group name import was in -> an_import object.
+    imports: Map<string, an_import[]>; // file id import -> an_import object.
 
     constructor(name_:string){
         this.name = name_;
