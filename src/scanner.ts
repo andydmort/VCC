@@ -6,7 +6,7 @@ enum Scanner_State {
     in_group
 }
 
-class Scanner {
+export class File_Scanner {
     /**
      * Specifies the file name that the scanner is looking at.
      */
@@ -20,6 +20,8 @@ class Scanner {
      * This value will be empty if nothing is being scanned.
      */
     current_group_name : string;
+    
+    current_group_lines: string[];
     /**
      * Specifies the current state of the scanner
      */
@@ -32,7 +34,7 @@ class Scanner {
     /**
      * Specifies the current file token being created
      */
-    file_token?: File_Token;
+    file_token: File_Token;
 
     /**
      * This class will scan a file and return File_Token 
@@ -42,7 +44,20 @@ class Scanner {
         this.line_num = 0;
         this.state = Scanner_State.not_in_group;
         this.current_group_name = "";
+        this.current_group_lines = [];
         this.file_name = file_name;
+
+        //Remove the last file_ext of the file_name for the token name
+        let tmp_arr = file_name.split("\\");
+        let tmp_arr2 = tmp_arr[tmp_arr.length -1].split("/");
+        let the_file_name = tmp_arr2[tmp_arr2.length -1];
+        let file_n_arr = the_file_name.split(".");
+        let pop = file_n_arr.pop(); // Remove the last item
+        let new_token_name = file_n_arr.reduce((cum, val)=>{
+            if(cum == "") return val;
+            else return cum+"."+val;
+        });
+        this.file_token = new File_Token(new_token_name);
 
         // read in the file
         let file_str = fs.readFileSync(file_name, "utf-8"); 
@@ -51,6 +66,9 @@ class Scanner {
     }
 
     scan(){
+        this.file_lines.forEach((line)=>{
+            this.scan_line(line);
+        });
     }
 
     /*
@@ -73,8 +91,44 @@ class Scanner {
         {
             // TODO: finish this section
             // see if it is an import
-            // see if it is an ending group of text
+            let import_matches = line_str.match(/\#\s*import\s+(\S+)\s+(\S+)\s*\#/);
+            if(import_matches)
+            {
+                // collect as import
+                let import_name = import_matches[1];
+                let import_id_to_give = import_matches[2];
+                this.current_group_lines.push(line_str);
+                this.file_token.add_import(
+                    import_name, 
+                    this.current_group_name, 
+                    this.current_group_lines.length-1,
+                    import_id_to_give 
+                    );
+            }
+            else
+            {
+                // see if it is an ending group of text
+                let ending_matches = line_str.match(/\#\s*end\s+(\S+)\s*\#/);
+                if(ending_matches)
+                {
+                    // finish the group
+                    this.file_token.add_group(this.current_group_name, this.current_group_lines);
+                    // Clear the local group info
+                    this.current_group_name = "";
+                    this.current_group_lines = [];
+                    this.state = Scanner_State.not_in_group;
+                }
+                else
+                {
+                    //add this line string to the group.
+                    this.current_group_lines.push(line_str);
+                }
+            }
         }
     }
-
 }
+
+
+
+
+
