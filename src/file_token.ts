@@ -23,7 +23,7 @@ export class File_Token {
     name: string;
     groups: Map<string,string[]>; // Group name to array of strings
     // import name to 
-    imports: Map<string, an_import[]>; // This might be subject to change, we must include the import name, the line number, and the group it is in. Maybe a more complex object.
+    imports: Map<string, an_import[]>; // Group name import was in -> an_import object.
 
     constructor(name_:string){
         this.name = name_;
@@ -44,4 +44,14 @@ export class File_Token {
         }
         this.imports.get(import_name)?.push({group_name:group_name, line_number:line_number, new_id:new_id});
     }
+
+    get_groups(){
+        return this.groups;
+    }
+    
+    get_imports(){
+        return this.imports;
+    }
+
+
 }

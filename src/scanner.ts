@@ -69,6 +69,7 @@ export class File_Scanner {
         this.file_lines.forEach((line)=>{
             this.scan_line(line);
         });
+        return this.file_token;
     }
 
     /*
