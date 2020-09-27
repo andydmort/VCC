@@ -103,7 +103,6 @@ export class File_Scanner {
                     import_name, 
                     this.current_group_name, 
                     this.current_group_lines.length-1,
-                    import_id_to_give 
                     );
             }
             else

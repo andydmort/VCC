@@ -13,9 +13,9 @@
  */
 interface an_import
 {
-    group_name: string,
+    file_name: string,
+    group_name: string
     line_number: number,
-    new_id: string|undefined
 };
 
 export class File_Token {
@@ -36,13 +36,13 @@ export class File_Token {
         this.groups.set(name, lines);
     }
 
-    add_import(import_name: string, group_name: string, line_number: number, new_id:string|undefined = undefined)
+    add_import(file_name: string, group_name: string, line_number: number)
     {
-        if(!this.imports.has(import_name))
+        if(!this.imports.has(file_name))
         {
-            this.imports.set(import_name, []);
+            this.imports.set(file_name, []);
         }
-        this.imports.get(import_name)?.push({group_name:group_name, line_number:line_number, new_id:new_id});
+        this.imports.get(file_name)?.push({file_name:file_name, line_number:line_number, group_name:group_name});
     }
 
     get_groups(){

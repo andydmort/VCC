@@ -1,4 +1,4 @@
-import {File_Scanner} from "../src/scanner";
+import {File_Scanner} from "../scanner";
 import Path from "path";
 import Assert from "assert";
 
