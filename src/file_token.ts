@@ -13,9 +13,10 @@
  */
 interface an_import
 {
-    file_name: string,
-    group_name: string
-    line_number: number,
+    file_import_name: string, // File name that has the code to import
+    group_import_name: string // groupt name that has the code to import
+    group_name: string, // The group that contains the import statement
+    line_number: number, // The line number of the import statement in the group
 };
 
 export class File_Token {
@@ -36,13 +37,19 @@ export class File_Token {
         this.groups.set(name, lines);
     }
 
-    add_import(file_name: string, group_name: string, line_number: number)
+    add_import(import_file_name:string, import_group_name: string, group_name: string, line_number: number)
     {
-        if(!this.imports.has(file_name))
+        if(!this.imports.has(import_file_name))
         {
-            this.imports.set(file_name, []);
+            this.imports.set(import_file_name, []);
         }
-        this.imports.get(file_name)?.push({file_name:file_name, line_number:line_number, group_name:group_name});
+        this.imports.get(import_file_name)?.push(
+            {
+                file_import_name:import_file_name, 
+                group_import_name: import_group_name,
+                line_number:line_number, 
+                group_name:group_name
+            });
     }
 
     get_groups(){
