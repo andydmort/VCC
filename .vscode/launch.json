@@ -14,7 +14,8 @@
             "trace": "all",
             "outFiles": [
                 "${workspaceFolder}/build/*.js"
-            ]
+            ],
+            "args": ["-s", "example_templates", "-m", "test2"]
         }
     ]
 }

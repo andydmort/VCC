@@ -34,3 +34,9 @@ file_name - Specifies the name of the file the group is in.
 group_name - Specifies the group of code that should be imported.
 
 The import statement will be replaced by the group code . 
+
+
+
+TODO ITEMS:
+[] In index.tx create a fuction to combine the complex array object into output string or file.
+[] Create tests for File_Tokens get_next_import, check_if_fulfiled, is_fulfiled, and fulfil_import functions.

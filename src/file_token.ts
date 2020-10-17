@@ -11,7 +11,7 @@
  * line_number Specifies the line number in the group to be replaced
  * new_id Specifies a new id to be give to the top element of the html imported. // TODO: figure out this this is needed.
  */
-interface an_import
+export interface an_import
 {
     file_import_name: string, // File name that has the code to import
     group_import_name: string // groupt name that has the code to import
@@ -23,7 +23,7 @@ interface an_import
 export class File_Token {
 
     name: string; 
-    groups: Map<string,string[]>; // Group name to array of strings
+    groups: Map<string,any[]>; // Group name to array of strings
     // import name to 
     imports: Map<string, an_import[]>; // import_file_name -> array of an_imports
     /**
@@ -35,7 +35,7 @@ export class File_Token {
         this.name = name_;
         this.groups = new Map<string, string[]>();
         this.imports = new Map<string, an_import[]>();
-        this.fulfilled = false;
+        this.fulfilled = true;
     }
 
     add_group(name: string, lines: string[]){
@@ -56,6 +56,7 @@ export class File_Token {
                 group_name:group_name,
                 fulfilled: false
             });
+            this.fulfilled = false;
     }
 
     get_groups(){
@@ -67,14 +68,25 @@ export class File_Token {
     }
 
     /**
+     * Gets a group that is in this file. 
+     * @param group_name Specifies the group of strings to collect.
+     */
+    get_group(group_name: string): string[]
+    {
+        return this.groups.get(group_name);
+    }
+
+    /**
      * Get an import to be fulfilled
      */
-    get_next_import(): [string, an_import[]]{
+    get_next_import(): [string, an_import[]] | undefined{
         if(this.imports.size > 0)
         {
             let key =Array.from(this.imports.keys())[0]; 
             return [key, this.imports.get(key)];
         }
+        else
+            return undefined;
     }
 
     /**
@@ -82,9 +94,9 @@ export class File_Token {
      * were fulfilled.
      */
     check_if_fulfilled(){
-        for(let import_arr_key in Array.from(this.imports))
+        for(let import_tup of this.imports)
         {
-            for(let thang of this.imports.get(import_arr_key))
+            for(let thang of this.imports.get(import_tup[0]))
             {
                 if(!thang.fulfilled)
                     return;
@@ -114,7 +126,7 @@ export class File_Token {
                 thang.line_number == the_import.line_number)
             {
                 // Fulfill this in the group
-                this.groups.get(group).splice(line_number+1, 0, ...lines);
+                this.groups.get(group).splice(line_number+1, 0, lines);
                 thang.fulfilled = true;            
                 this.check_if_fulfilled();
                 return true;
