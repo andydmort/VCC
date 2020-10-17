@@ -126,7 +126,11 @@ export class File_Token {
                 thang.line_number == the_import.line_number)
             {
                 // Fulfill this in the group
-                this.groups.get(group).splice(line_number+1, 0, lines);
+                let tmp = this.groups.get(group)[line_number];
+                let tmp_lines = lines;
+                tmp_lines.splice(0,0,tmp);
+                tmp_lines.push(tmp); 
+                this.groups.get(group).splice(line_number, 1, lines);
                 thang.fulfilled = true;            
                 this.check_if_fulfilled();
                 return true;

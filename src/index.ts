@@ -2,6 +2,7 @@ import {File_Token, an_import} from "./file_token";
 import {File_Scanner, Main_File_Scanner} from "./scanner"
 import path from "path";
 import yargs from "yargs";
+import { type, EOL } from "os";
 
 let argv = yargs(process.argv.slice(2))
     .usage(`Usage: $0 [options]`)
@@ -69,12 +70,33 @@ function fulfill(token: File_Token): File_Token
     return token;
 }
 
-console.log(main_token.get_groups());
-console.log(main_token.get_imports());
+// console.log(main_token.get_groups());
+// console.log(main_token.get_imports());
 
 fulfill(main_token);
 
-console.log(main_token.get_group("main"));
+function consolidate(group: any[]): string
+{
+    let rtn: string = "";
+    for( let s of group)
+    {
+        if(typeof(s) == "string")
+        {
+            rtn = rtn.concat(s);
+        }
+        else if(typeof(s) == "object")
+        {
+            rtn = rtn.concat(consolidate(s));
+        }
+        rtn = rtn.concat(EOL);
+    }
+    return rtn;
+}
+console.log("here");
+console.log(consolidate(main_token.get_group("main")));
+
+
+
 //TODO: at the moment main is filled with array of strings and other arrays. We need to take this 
 // complex object and turn in into a single string that will write out to a file.
 
