@@ -17,8 +17,11 @@
     "url": "https://github.com/andydmort/VCC/issues"
   },
   "homepage": "https://github.com/andydmort/VCC#readme",
-  "dependencies": {},
+  "dependencies": {
+    "yargs": "^16.1.0"
+  },
   "devDependencies": {
+    "@types/yargs": "^15.0.9",
     "@types/mocha": "^8.0.3",
     "@types/node": "^14.10.1",
     "mocha": "^8.1.3",
