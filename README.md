@@ -2,8 +2,6 @@
 This is a compiler that will take template files and create html and js files. Similar to View.js but more of an open ended framework. The template files will consists of just html and js. These template files will be compiled together into a single html file. 
 
 
-
-
 ## Grouping
 
 Groups mark code that can be imported into another file. 
@@ -36,7 +34,6 @@ group_name - Specifies the group of code that should be imported.
 The import statement will be replaced by the group code . 
 
 
+## Examples
+$ node build/index.js -s example_templates -m test2 -o result.html
 
-TODO ITEMS:
-[] In index.tx create a fuction to combine the complex array object into output string or file.
-[] Create tests for File_Tokens get_next_import, check_if_fulfiled, is_fulfiled, and fulfil_import functions.

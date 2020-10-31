@@ -1,0 +1,26 @@
+<!-- # begin html# -->
+    <link rel="stylesheet" href="style.css">
+    <!-- # import test html # -->
+    <link rel="stylesheet" href="style.css">
+    <p>
+        This is great and great.
+    </p>
+    <!-- # import test html # -->
+
+<!-- # end html# -->
+
+
+<script>
+// # begin js# 
+    // # import test js # 
+    console.log("This is a test");
+    // # import test3 stuff #
+    for(let i =0; i<10; i++) 
+    console.log(i);
+    // # import test3 stuff #
+
+    // # import test js # 
+
+    console.log("Was up world");
+// # end js# 
+</script>
