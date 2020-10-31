@@ -36,4 +36,5 @@ The import statement will be replaced by the group code .
 
 ## Examples
 $ node build/index.js -s example_templates -m test2 -o result.html
+$ node -h
 

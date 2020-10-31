@@ -11,6 +11,7 @@ let argv = yargs(process.argv.slice(2))
     .describe('m', 'Sets the main file')
     .alias('m', "main_file")
     .default('m', "main")
+    .demandOption("m")
 
     .describe("o", "resulting file")
     .alias("o", "output_file")
